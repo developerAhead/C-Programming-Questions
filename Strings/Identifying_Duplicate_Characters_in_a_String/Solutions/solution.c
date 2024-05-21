@@ -16,8 +16,17 @@ void printDuplicateCharacters(char *str)
     
     for(int i = 0; str[i] != '\0'; i++)
     {
-        index = LETTER_INDEX(str[i]);
-        charCount[index]++;
+        // index = LETTER_INDEX(str[i]);
+        if( ('A' <= str[i]) && (str[i] <= 'Z') )
+            index = str[i] - 'A';
+        else if ( ('a' <= str[i]) && (str[i] <= 'z') )
+            index = str[i] - 'a';
+        else
+            index = -1;
+
+        if (index != -1)
+            charCount[index]++;
+        
         
         if(charCount[index] == 2)
             printf("%c ", str[i]);
@@ -30,7 +39,7 @@ int main()
     while (1)
     {
         printf("\nEnter a string : ");
-        scanf("%s", str);
+        scanf("%[^\n]%*c", str);
         printDuplicateCharacters(str);
     }
     return 0;
